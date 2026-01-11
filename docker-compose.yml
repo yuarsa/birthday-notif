@@ -14,7 +14,7 @@ services:
       APP_ENV: development
       NODE_ENV: development
       MONGO_URI: mongodb://mongo:27017/birthday_notif
-      REDIS_HOST: localhost
+      REDIS_HOST: redis
       REDIS_PORT: 6379
       JWT_SECRET: satriamandragunasatriamandragunasatriamandragunasatriamandraguna
       JWT_EXPIRATION: 1d
