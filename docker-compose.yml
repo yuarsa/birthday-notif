@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # API
+  app:
+    build: .
+    container_name: bd-api
+    restart: always
+    ports:
+      - '4000:4000'
+    environment:
+      APP_PORT: 4000
+      APP_HOST: 0.0.0.0
+      APP_ENV: development
+      NODE_ENV: development
+      MONGO_URI: mongodb://mongo:27017/birthday_notif
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      JWT_SECRET: satriamandragunasatriamandragunasatriamandragunasatriamandraguna
+      JWT_EXPIRATION: 1d
+      BIRTHDAY_NOTIFICATION_TIME: '09:00'
+      BIRTHDAY_SERVICE_URL: 'https://email-service.digitalenvision.com.au/send-email'
+
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - bd-network
+
+  # MongoDB
+  mongo:
+    image: mongo:latest
+    container_name: bd-mongo
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - bd-network
+
+  # Redis
+  redis:
+    image: redis:alpine
+    container_name: bd-redis
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - bd-network
+
+networks:
+  bd-network:
+    driver: bridge
+volumes:
+  mongo_data:
+  redis_data:

@@ -58,6 +58,101 @@ pnpm run start:dev
 pnpm run start:prod
 ```
 
+## Running with Docker
+
+The easiest way to run the application is using Docker. This will automatically set up the API, MongoDB, and Redis.
+
+1.  **Build and Run**
+    ```bash
+    docker-compose up -d --build
+    ```
+
+2.  **Access the Application**
+    The API will be available at `http://localhost:4000`.
+
+3.  **View Logs**
+    ```bash
+    docker-compose logs -f app
+    ```
+
+4.  **Seed Data (Optional)**
+    You can run the seeder inside the container:
+    ```bash
+    docker-compose exec app pnpm run db:seed
+    ```
+
+5.  **Stop Containers**
+    ```bash
+    docker-compose down
+    ```
+
+## API Endpoints
+
+The API is available at `http://localhost:4000`.
+You can import `BirthDay-Service-Collection.json` into Postman for easy testing.
+
+### Auth
+- **Login**
+  - `POST /v1/auth/login`
+  - Body:
+    ```json
+    {
+      "email": "admin@app.com",
+      "password": "Password123!"
+    }
+    ```
+
+### Users
+- **List Users**
+  - `GET /v1/users`
+  - *Requires Bearer Token*
+
+- **Create User**
+  - `POST /v1/users`
+  - *Requires Bearer Token*
+  - Body:
+    ```json
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@example.com",
+      "password": "Password123!",
+      "dateOfBirth": "1990-01-01",
+      "location": "Indonesia",
+      "timezone": "Asia/Jakarta"
+    }
+    ```
+
+- **Get User Detail**
+  - `GET /v1/users/:userId`
+  - *Requires Bearer Token*
+
+- **Update User**
+  - `PUT /v1/users/:userId`
+  - *Requires Bearer Token*
+  - Body:
+    ```json
+    {
+      "firstName": "John Updated",
+      "lastName": "Doe"
+    }
+    ```
+
+- **Delete User**
+  - `DELETE /v1/users/:userId`
+  - *Requires Bearer Token*
+
+### Scheduler (Testing)
+- **Manual Trigger**
+  - `POST /v1/scheduler/trigger`
+  - Body:
+    ```json
+    {
+      "type": "BIRTHDAY",
+      "hour": 9
+    }
+    ```
+
 ## Seeding Data
 
 To populate the database with dummy users for testing:

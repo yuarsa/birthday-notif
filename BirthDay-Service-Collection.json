@@ -1,0 +1,274 @@
+{
+  "info": {
+    "name": "BirthDay Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "{{url}}/v1/auth/login",
+          "protocol": "",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "v1",
+            "auth",
+            "login"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@app.com\",\n  \"password\": \"Password123!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "string"
+              }
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/v1/users",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v1",
+                "users"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Nananina 2\",\n  \"lastName\": \"Okay\",\n  \"email\": \"nananina5@app.com\",\n  \"password\": \"Password1234!\",\n  \"dateOfBirth\": \"1991-01-12\",\n  \"location\": \"Indonesia\",\n  \"timezone\": \"Asia/Jakarta\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "string"
+              }
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/v1/users/:userId",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v1",
+                "users",
+                ":userId"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "69632f9f6383f2ec91903c13"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "string"
+              }
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/v1/users",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v1",
+                "users"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Show",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "string"
+              }
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/v1/users/:userId",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v1",
+                "users",
+                ":userId"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "696324120dfbdb9fcfddef63"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "string"
+              }
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/v1/users/:userId",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "v1",
+                "users",
+                ":userId"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John Updated\",\n  \"lastName\": \"Doe\",\n  \"email\": \"user1@app.com\",\n  \"password\": \"Password1234!\",\n  \"dateOfBirth\": \"1990-01-20\",\n  \"timezone\": \"Asia/Jakarta\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trigger Testing",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "{{url}}/v1/scheduler/trigger",
+          "protocol": "",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "v1",
+            "scheduler",
+            "trigger"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"BIRTHDAY\",\n  \"hour\": 4\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
